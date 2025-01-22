@@ -64,7 +64,7 @@ function getRandomResult() {
 // Backend Fetch Functions
 async function fetchCurrentBetNumber() {
     try {
-        const response = await fetch('${BACKEND_URL}/api/dashboard/current-bet-number');
+        const response = await fetch(`${BACKEND_URL}/api/dashboard/current-bet-number`);
         const data = await response.json();
         currentBetNumber = data.currentBetNumber || 1;
         betNumberElement.textContent = currentBetNumber;
@@ -75,7 +75,7 @@ async function fetchCurrentBetNumber() {
 
 async function updateCurrentBetNumber() {
     try {
-        await fetch('${BACKEND_URL}/api/dashboard/update-bet-number', {
+        await fetch(`${BACKEND_URL}/api/dashboard/update-bet-number`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ currentBetNumber }),
@@ -91,7 +91,7 @@ async function savePlayerHistory(betNo, played, betAmount, status, amountWon, ba
             username,
             historyEntry: { betNo, played, betAmount, status, amountWon, balanceAfterBet },
         };
-        await fetch('${BACKEND_URL}/api/dashboard/player-history', {
+        await fetch(`${BACKEND_URL}/api/dashboard/player-history`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
@@ -138,7 +138,7 @@ async function updateResultHistory(betNo, alphabet, color) {
     tableBody.prepend(newRow);
 
     try {
-        await fetch('${BACKEND_URL}/api/dashboard/result-history', {
+        await fetch(`${BACKEND_URL}/api/dashboard/result-history`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ resultEntry: { betNumber: betNo, alphabet, color } }),
@@ -151,7 +151,7 @@ async function updateResultHistory(betNo, alphabet, color) {
 // Ensure result history persists across page refreshes
 async function fetchResultHistory() {
     try {
-        const response = await fetch('${BACKEND_URL}/api/dashboard/result-history');
+        const response = await fetch(`${BACKEND_URL}/api/dashboard/result-history`);
         const history = await response.json();
 
         // Sort the results in descending order by betNumber
@@ -193,7 +193,7 @@ async function fetchUserBalance() {
 
 async function updateUserBalance(newBalance) {
     try {
-        await fetch('${BACKEND_URL}/api/dashboard/balance', {
+        await fetch(`${BACKEND_URL}/api/dashboard/balance`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, balance: newBalance }),
@@ -205,7 +205,7 @@ async function updateUserBalance(newBalance) {
 
 async function saveBetForAdmin(betData) {
     try {
-        await fetch('${BACKEND_URL}/api/dashboard/active-bets', {
+        await fetch(`${BACKEND_URL}/api/dashboard/active-bets`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(betData),
@@ -218,7 +218,7 @@ async function saveBetForAdmin(betData) {
 // Fetch the timer state from the server
 async function fetchTimerState() {
     try {
-        const response = await fetch('${BACKEND_URL}/api/dashboard/timer-state');
+        const response = await fetch(`${BACKEND_URL}/api/dashboard/timer-state`);
         const data = await response.json();
         timeLeft = data.timeLeft;
         currentBetNumber = data.currentBetNumber;
@@ -232,7 +232,7 @@ async function fetchTimerState() {
 // Helper function to update the timer state on the server
 async function updateTimerState(timeLeft, currentBetNumber) {
         try {
-            await fetch("${BACKEND_URL}/api/dashboard/update-timer-state", {
+            await fetch(`${BACKEND_URL}/api/dashboard/update-timer-state`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ timeLeft, currentBetNumber }),
@@ -349,7 +349,7 @@ async function startGlobalTimer() {
     // Fetch Manual Result State
 async function fetchManualResultState() {
     try {
-        const response = await fetch("${BACKEND_URL}/api/dashboard/manual-result-state");
+        const response = await fetch(`${BACKEND_URL}/api/dashboard/manual-result-state`);
         return await response.json();
     } catch (err) {
         console.error("Error fetching manual result state:", err);
