@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seth Color Prediction</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" sizes="16x16" href="images/welcomelogo.webp">
+<link rel="icon" sizes="32x32" href="images/welcomelogo.webp">
+<link rel="icon" sizes="48x48" href="images/welcomelogo.webp">
+<link rel="icon" sizes="180x180" href="images/welcomelogo.webp">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Form -->
+        <div id="loginForm" class="form">
+            <h1>Login</h1>
+            <label for="loginPhone">Username/Phone Number</label>
+            <input type="text" id="loginPhone" placeholder="Enter your username/phone number">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" placeholder="Enter your password">
+            <button id="loginButton">Log In</button>
+            <p><a href="#" id="forgotPassword">Forgot Password?</a></p>
+            <p>Don't have an account? <a href="#" id="switchToSignup">Sign Up</a></p>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signupForm" class="form hidden">
+            <h1>Sign Up</h1>
+            <label for="signupPhone">Phone Number</label>
+            <input type="tel" id="signupPhone" placeholder="Enter your phone number">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your username">
+            <label for="password">Create Password</label>
+            <input type="password" id="signupPassword" placeholder="Create a password">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" placeholder="Confirm your password">
+            <div class="checkbox-container">
+                <input type="checkbox" id="ageCheck">
+                <label for="ageCheck" class="checkbox-label">I am 18 years or above</label>
+            </div>
+            <h2><b>Security Questions</b></h2>
+            <label for="favCar">Favorite Car</label>
+            <input type="text" id="favCar" placeholder="Enter your favorite car">
+            <label for="favFood">Favorite Food</label>
+            <input type="text" id="favFood" placeholder="Enter your favorite food">
+            <label for="bestFriend">Best Friend's Name</label>
+            <input type="text" id="bestFriend" placeholder="Enter your best friend's name">
+            <button id="signupButton">Sign Up</button>
+            <p>Already have an account? <a href="#" id="switchToLogin">Log In</a></p>
+        </div>
+
+        <!-- Forgot Password Form -->
+        <div id="forgotPasswordForm" class="form hidden">
+            <h1>Forgot Password</h1>
+            <label for="forgotPhoneOrUsername">Username/Phone Number</label>
+            <input type="text" id="forgotPhoneOrUsername" placeholder="Enter your username or phone number">
+            <h2><b>Security Questions</b></h2>
+            <label for="forgotFavCar">Favorite Car</label>
+            <input type="text" id="forgotFavCar" placeholder="Enter your favorite car">
+            <label for="forgotFavFood">Favorite Food</label>
+            <input type="text" id="forgotFavFood" placeholder="Enter your favorite food">
+            <label for="forgotBestFriend">Best Friend's Name</label>
+            <input type="text" id="forgotBestFriend" placeholder="Enter your best friend's name">
+            <label for="newPassword">New Password</label>
+            <input type="password" id="newPassword" placeholder="Enter new password">
+            <label for="confirmNewPassword">Confirm New Password</label>
+            <input type="password" id="confirmNewPassword" placeholder="Confirm new password">
+            <button id="resetPasswordButton">Reset Password</button>
+            <p>Remembered your password? <a href="#" id="switchToLoginForm">Log In</a></p>
+        </div>
+    </div>
+</body>
+</html>
