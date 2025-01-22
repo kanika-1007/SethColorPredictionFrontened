@@ -44,7 +44,7 @@ resultToggle.addEventListener("change", async (event) => {
 
     // Update the manual result state on the server
     try {
-        await fetch("${BACKEND_URL}/api/dashboard/manual-result-state", {
+        await fetch(`${BACKEND_URL}/api/dashboard/manual-result-state`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ isManualResultEnabled, selectedColor }),
@@ -58,7 +58,7 @@ resultToggle.addEventListener("change", async (event) => {
     saveManualResultButton.addEventListener('click', async () => {
         selectedColor = manualResultColor.value;
         try {
-            const response = await fetch('${BACKEND_URL}/api/dashboard/set-manual-result', {
+            const response = await fetch(`${BACKEND_URL}/api/dashboard/set-manual-result`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ isManualResultEnabled, selectedColor }),
@@ -78,7 +78,7 @@ resultToggle.addEventListener("change", async (event) => {
 // Fetch the Manual Result State on Page Load
 async function fetchManualResultState() {
     try {
-        const response = await fetch('${BACKEND_URL}/api/dashboard/manual-result-state');
+        const response = await fetch('${BACKEND_URL}/api/dashboard/manual-result-state`);
         const data = await response.json();
 
         // Reset manual result state
@@ -109,7 +109,7 @@ async function fetchManualResultState() {
      // Fetch the current bet number
     async function fetchCurrentBetNumber() {
         try {
-            const response = await fetch("${BACKEND_URL}/api/dashboard/current-bet-number");
+            const response = await fetch(`${BACKEND_URL}/api/dashboard/current-bet-number`);
             const data = await response.json();
             currentBetNumber = data.currentBetNumber || 0;
             fetchActiveBets(currentBetNumber); // Fetch active bets after getting the current bet number
@@ -200,7 +200,7 @@ async function fetchManualResultState() {
     // Approve or Reject a money add request
     async function handleMoneyAddAction(requestId, action) {
         try {
-            const response = await fetch('${BACKEND_URL}/api/add-money/approve', {
+            const response = await fetch(`${BACKEND_URL}/api/add-money/approve`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ requestId, action }),
@@ -259,7 +259,7 @@ async function fetchManualResultState() {
     // Approve or Reject a withdrawal request
     async function handleWithdrawalAction(requestId, action) {
         try {
-            const response = await fetch('${BACKEND_URL}/api/withdrawal/update-status', {
+            const response = await fetch(`${BACKEND_URL}/api/withdrawal/update-status`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ requestId, action }),
@@ -288,7 +288,7 @@ async function fetchManualResultState() {
     // Fetch the current UPI ID
     async function fetchCurrentUpiId() {
         try {
-            const response = await fetch('${BACKEND_URL}/api/add-money/current-upi-id');
+            const response = await fetch(`${BACKEND_URL}/api/add-money/current-upi-id`);
             const data = await response.json();
             upiIdInput.value = data.upiId || '';
         } catch (err) {
@@ -306,7 +306,7 @@ async function fetchManualResultState() {
         }
 
         try {
-            const response = await fetch('${BACKEND_URL}/api/add-money/update-upi-id', {
+            const response = await fetch(`${BACKEND_URL}/api/add-money/update-upi-id`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ newUpiId }),
