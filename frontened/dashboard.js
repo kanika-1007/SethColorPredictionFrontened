@@ -327,7 +327,7 @@ async function startGlobalTimer() {
                     betNumberElement.textContent = currentBetNumber;
     
                     // Reset the timer state on the server for the next round
-                    timeLeft = 10;
+                    timeLeft = 35;
                     await updateTimerState(timeLeft, currentBetNumber);
     
                     startGlobalTimer();
