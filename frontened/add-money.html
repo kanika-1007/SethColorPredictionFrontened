@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Money</title>
+    <link rel="stylesheet" href="add-money.css">
+    <script src="add-money.js" defer></script>
+</head>
+<body>
+    <div class="add-money-container">
+        <h2>Add Money</h2>
+        <p class="balance">Available Balance: ₹<span id="available-balance">0</span></p>
+
+        <!-- Enter Amount -->
+        <label for="amount">Enter Amount to Add (₹):</label>
+        <input type="number" id="amount" placeholder="Enter amount" min="1">
+
+        <!-- Payment Options -->
+        <div class="payment-options">
+            <!-- QR Code Payment -->
+            <div class="payment-option">
+                <h3>Scan QR Code</h3>
+                <p>Scan the QR code below to pay:</p>
+                <img src="images/qr-code.jpeg" alt="QR Code" class="qr-code">
+                <label for="qr-utr">Enter UTR (Reference No.):</label>
+                <input type="text" id="qr-utr" placeholder="Enter UTR">
+                <button id="qr-submit-button">Submit</button>
+            </div>
+
+            <!-- UPI Payment -->
+            <div class="payment-option">
+                <h3>Manual UPI Transfer</h3>
+                <label for="upi-id">Copy the below UPI ID:</label>
+                <div class="upi-container">
+                    <span id="upi-id" class="upi-id-text">326799149738539@cnrb</span>
+                    <img src="images/copy-icon.png" id="copy-upi-button" alt="Copy" class="copy-icon">
+                </div>
+                <label for="manual-utr">Enter UTR (Reference No.):</label>
+                <input type="text" id="manual-utr" placeholder="Enter UTR">
+                <button id="manual-submit-button">Submit</button>
+            </div>
+        </div>
+
+        <!-- Success Message -->
+        <div id="add-money-message" class="message" style="display: none;"></div>
+        <!-- Note -->
+        <p class="note">
+            <strong>Note:</strong><br>
+            1. Please ensure you have installed the UPI app.<br>
+            2. Do not pay for the same link repeatedly.
+        </p>
+
+        <!-- Withdrawal History -->
+        <button id="view-history-button">View Add Money History</button>
+
+        <!-- Modal for Add Money History -->
+        <div id="payment-history-modal" class="modal">
+            <div class="modal-content">
+                <h3>Add Money History</h3>
+                <div class="table-container">
+                <table id="add-money-requests-table">
+                    <thead>
+                        <tr>
+                            <th>S.No.</th>
+                            <th>Request ID</th>
+                            <th>Amount (₹)</th>
+                            <th>UTR No.</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Payment history will be populated here dynamically -->
+                    </tbody>
+                </table>
+                </div>
+                <button id="close-history-button">Close</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

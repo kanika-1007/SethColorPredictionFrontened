@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdrawal System</title>
+    <link rel="stylesheet" href="withdrawal.css">
+    <script src="withdrawal.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Withdraw Funds</h1>
+        <div class="balance-section">
+            <h2>Available Balance: ₹<span id="available-balance">0</span></h2>
+        </div>
+        <div class="form-section">
+            <label for="withdraw-method">Select Withdrawal Method:</label>
+            <select id="withdraw-method">
+                <option value="UPI">UPI</option>
+                <option value="Bank">Bank Transfer</option>
+            </select>
+
+            <div id="upi-details" style="display: none;">
+                <label for="upi-id">Enter UPI ID:</label>
+                <input type="text" id="upi-id" placeholder="e.g., yourname@upi">
+            </div>
+
+            <div id="bank-details" style="display: none;">
+                <label for="account-holder">Account Holder Name:</label>
+                <input type="text" id="account-holder" placeholder="Enter account holder's name">
+
+                <label for="bank-name">Bank Name:</label>
+                <input type="text" id="bank-name" placeholder="Enter bank name">
+
+                <label for="account-number">Account Number:</label>
+                <input type="text" id="account-number" placeholder="Enter account number">
+
+                <label for="ifsc-code">IFSC Code:</label>
+                <input type="text" id="ifsc-code" placeholder="Enter IFSC code">
+            </div>
+
+            <label for="withdraw-amount">Enter Amount to Withdraw (₹):</label>
+            <input type="number" id="withdraw-amount" min="1" placeholder="Enter amount">
+
+            <button id="withdraw-button">Request Withdrawal</button>
+        </div>
+        <div id="withdrawal-message" class="withdrawal-message"></div>
+
+        <!-- Withdrawal History -->
+        <button id="view-history-button" class="view-history-button">View Withdrawal History</button>
+    </div>
+
+    <!-- Withdrawal History Modal -->
+    <div id="bet-history-modal" class="modal">
+        <div class="modal-content">
+            <h2>Withdrawal Requests</h2>
+            <div class="table-container">
+            <table id="player-withdrawal-requests-table">
+                <thead>
+                    <tr>
+                        <th>Request ID</th>
+                        <th>Method</th>
+                        <th>Details</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Requests will be dynamically added here -->
+                </tbody>
+            </table>
+            </div>
+            <button id="close-history-button" class="close-modal-button">Close</button>
+        </div>
+    </div>
+</body>
+</html>

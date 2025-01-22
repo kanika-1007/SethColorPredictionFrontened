@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="admin_dashboard.css">
+    <script src="admin_dashboard.js" defer></script>
+</head>
+<body>
+    <div class="admin-container">
+        <h1>Admin Dashboard</h1>    
+        <div id="upi-id-section">
+            <h3>Update UPI ID</h3>
+            <label for="upi-id-input">Enter New UPI ID:</label>
+            <input type="text" id="upi-id-input" placeholder="e.g., yourname@upi">
+            <button id="update-upi-id-button">Update</button>
+            <p id="upi-id-message" class="hidden"></p>
+        </div>
+        
+        <h3>Active Bets</h3>
+<table>
+    <thead>
+        <tr>
+            <th>S.No.</th>
+            <th>Bet No.</th>
+            <th>Block</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody id="active-bets-table-body">
+        <!-- Active bets will be populated here -->
+    </tbody>
+</table>
+
+<h3>Bet Totals on Colors</h3>
+<table>
+    <thead>
+        <tr>
+            <th>Block</th>
+            <th>Total Amount</th>
+        </tr>
+    </thead>
+    <tbody id="totals-table-body">
+        <!-- Totals will be populated here -->
+    </tbody>
+</table>  
+
+<div class="toggle-container">
+    <label for="result-toggle">Enable Manual Result:</label>
+    <input type="checkbox" id="result-toggle">
+</div>
+
+<div id="manual-result-section" style="display: none;">
+    <label for="manual-result-color">Select Color:</label>
+    <select id="manual-result-color">
+        <option value="Green">Green</option>
+        <option value="Red">Red</option>
+        <option value="Violet">Violet</option>
+    </select>
+    <button id="save-manual-result">Save</button>
+</div>
+
+       <!-- Tiles -->
+        <div class="dashboard-tiles">
+            <div class="tile" id="withdrawal-tile">
+                <h2>Withdrawal Requests</h2>
+            </div>
+            <div class="tile" id="money-add-tile">
+                <h2>Money Add Confirmation</h2>
+            </div>
+        </div>
+
+        <!-- Withdrawal Requests Table -->
+        <div id="withdrawal-section" class="hidden">
+            <h2>Withdrawal Requests</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Request ID</th>
+                        <th>Payment Method</th>
+                        <th>Details</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="withdrawal-table-body">
+                    <!-- Withdrawal requests will be dynamically rendered here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Money Add Confirmation Table -->
+        <div id="money-add-section" class="hidden">
+            <h2>Money Add Confirmation</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>S.No.</th>
+                        <th>Request ID</th>
+                        <th>Player Username</th>
+                        <th>Amount</th>
+                        <th>UTR No.</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="money-add-table-body">
+                    <!-- Money add requests will be dynamically rendered here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
