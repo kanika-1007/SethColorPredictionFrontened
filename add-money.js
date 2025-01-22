@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         try {
-            const response = await fetch('${BACKEND_URL}/api/add-money/request', {
+            const response = await fetch(`${BACKEND_URL}/api/add-money/request`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ username, amount, utr, paymentType }),
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function fetchAndDisplayUpiId() {
         try {
-            const response = await fetch('${BACKEND_URL}/api/add-money/current-upi-id');
+            const response = await fetch(`${BACKEND_URL}/api/add-money/current-upi-id`);
             const data = await response.json();
             const upiIdElement = document.getElementById('upi-id');
             upiIdElement.textContent = data.upiId || 'Not Set';
