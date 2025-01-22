@@ -78,7 +78,7 @@ resultToggle.addEventListener("change", async (event) => {
 // Fetch the Manual Result State on Page Load
 async function fetchManualResultState() {
     try {
-        const response = await fetch('${BACKEND_URL}/api/dashboard/manual-result-state`);
+        const response = await fetch(`${BACKEND_URL}/api/dashboard/manual-result-state`);
         const data = await response.json();
 
         // Reset manual result state
