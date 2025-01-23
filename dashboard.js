@@ -27,8 +27,8 @@ const closeHistoryButton = document.getElementById('close-history-button');
 const BACKEND_URL = "https://seth-color-prediction.onrender.com";
 const scrollContainer = document.querySelector('.scroll-container');
 scrollContainer.addEventListener('scroll', () => {
-    if (scrollContainer.scrollLeft > 50) { // Limit scrolling to 300px
-        scrollContainer.scrollLeft = 50;
+    if (scrollContainer.scrollLeft > 70) { // Limit scrolling to 300px
+        scrollContainer.scrollLeft = 70;
     }
 });
 
