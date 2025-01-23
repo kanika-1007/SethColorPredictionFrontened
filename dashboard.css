@@ -1,15 +1,3 @@
-body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    /* max-width: 100%; */
-    width: 100%; /* Full width of the viewport */
-    max-width: 1200px; /* Limit scrolling to 1200px */
-    overflow-x: auto;
-    white-space: nowrap; /* Prevent content wrapping */
-    margin: 0 auto; /* Center the container */
-}
 .scroll-container {
     width: 100%; /* Full width of the viewport */
     max-width: 1200px; /* Limit scrolling to 1200px */
@@ -17,305 +5,119 @@ body {
     white-space: nowrap; /* Prevent content wrapping */
     margin: 0 auto; /* Center the container */
 }
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #e1c2b3, #d3a8a0); /* Gradient similar to the background color of the image */
+}
 
+/* Top bar with glass effect */
 .top-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    /* background: url('images/top-image.jpg') repeat center center; */
-    background-size: contain;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    width:100%;
-    max-width: 1500px;
-    height: 150px;
-    top: 0;
-    border-bottom: 2px solid  #0072ff;
+    border-bottom: 3px solid gray;
+    border-radius: 15px;
+    width: 92%;
+    max-width: 1200px;
 }
 
+/* Profile section */
 .user-info {
     display: flex;
     align-items: center;
-    margin-top: -50px;
-    font-style: bold;
     font-size: 22px;
-    color: black; /* Gold text */
+    color: #333;
+    font-weight: bold;
 }
 
 .person-icon {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
-    margin-right: 10px;
+    margin-right: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 
-#user-id {
-    font-size: 22px;
-    font-weight: bold;
-    background-color: white;
-}
-
-/* Timer container styling */
+/* Timer styles */
 .timer-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-left: -50px; /* Center the container on the page */
-    width: 150px;
-    color: black; /* Gold text */
-}
-
-/* Timer label styling */
-.timer-label {
-    font-size: 25px;
-    font-weight: bold;
-    margin-bottom: 10px;
     text-align: center;
-    background-color: white;
 }
 
-/* Flip timer styling (already defined) */
+.timer-label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0072ff;
+}
 .flip {
     font-size: 52px;
     font-weight: bold;
     color: #0072ff;
-    background-color: #fff;
-    border: 2px solid #0072ff;
+    background: white;
+    border: 3px solid #0072ff;
     border-radius: 10px;
-    padding: 10px 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    padding: 20px 30px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-.balance-info {
-    display: flex;
-    flex-direction: column; /* Stack content vertically */
-    align-items: flex-start; /* Align content to the left */
-    margin-top: -20px;
-    margin-right: 20px;
-    color: black; /* Gold text */
-}
-
-.balance-details {
-    display: flex;
-    align-items: center;
-    font-size: 22px;
-    font-weight: bold;
-    margin-right: 40px;
-}
-
-.balance-actions {
-    display: flex;
-    gap: 20px; /* Add space between the buttons */
-    margin-top: 10px; /* Add spacing below the balance details */
-}
-
-.balance {
+/* Button styles */
+.withdraw-button, .add-balance {
+    padding: 15px 30px;
     font-size: 18px;
     font-weight: bold;
-    display: flex;
-    align-items: center;
-    margin-right: 10px;
-}
-
-.rupee-icon {
-    font-size: 20px;
-    margin-right: 5px;
-}
-
-.add-balance {
-    width: 120px;
-    padding: 10px 15px;
-    background-color: #0072ff;
     color: white;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
     border: none;
-    border-radius: 5px;
+    border-radius: 50px;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-}
-
-.add-balance:hover {
-    background-color: #e64a19;
-    transform: scale(1.1);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .withdraw-button {
-    width: 120px;
-    padding: 10px 15px;
-    background-color: #0072ff;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+    background: linear-gradient(to right, #0072ff, #0056b3);
 }
 
-.withdraw-button:hover {
-    background-color: #0056b3;
+.add-balance {
+    background: linear-gradient(to right, #ff512f, #dd2476);
+}
+
+.withdraw-button:hover, .add-balance:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
 }
-
-@keyframes flip {
-   from { transform : rotateX(0deg); }
-   to { transform : rotateX(360deg); }
-}
-
-/* Responsive adjustments for phones */
+/* Responsive Design */
 @media (max-width: 768px) {
     .top-bar {
         flex-direction: column;
-        align-items: center;
-        height: auto;
-        background: none;  /* Remove background image */
-        background-color: #fff; /* Use solid background color */
+        padding: 20px;
     }
-    .scroll-container {
-        max-width: 100%;
-        overflow-x: auto;
+    .user-info{
+        margin-top: -25px;
     }
-
-    .user-info {
-        margin: 10px 0;
-        font-size: 18px;
-    }
-
-    .person-icon {
+    .person-icon{
         width: 40px;
         height: 40px;
     }
-
-    #user-id {
-        font-size: 18px;
-        padding: 4px 8px;
-    }
-
-    .timer-container {
-        margin-top: 5px;
-        width: 100%;
-    }
-
-    .timer-label {
-        font-size: 22px;
-    }
-
-    .flip {
-        font-size: 40px;
-        padding: 8px 15px;
-    }
-
-    .balance-info {
-        align-items: center;
-        width: 100%;
-        justify-content: center;
-        margin-top: 10px;
-    }
-
-    .balance-details {
-        font-size: 18px;
-        margin-right: 0;
-        text-align: center;
-    }
-
-    .balance-actions {
-        gap: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    .add-balance {
-        width: 45px;
-        height: 45px;
-        font-size: 20px;
-    }
-
-    .withdraw-button {
-        font-size: 14px;
-        width: 100px;
-    }
-}
-
-/* Responsive adjustments for very small screens */
-@media (max-width: 480px) {
-    .top-bar {
-        padding: 10px;
-        height: 150px;
-        width: 1500px;
-        position: relative;
-        overflow-x:scroll;
-    }
-    .scroll-container {
-        max-width: 400px;
-        overflow-x: auto;
-    }
-
-    .user-info {
-        font-size: 18px;
-        margin-left:-1335px;
-        margin-top:-15px;
-    }
-
-    .person-icon {
-        width: 30px;
-        height: 30px;
-    }
-
-    #user-id {
-        font-size: 18px;
-    }
-
-    .timer-label {
-        font-size: 18px;
-        margin-left:-1080px;
+    .timer-container{
         margin-top: -20px;
     }
-
-    .flip {
-        font-size: 50px;
-        padding: 6px 12px;
-        margin-left:-1080px;
-        margin-top: -2px;
-    }
-    
-    .balance-details{
-        margin-top:-285px;
-        margin-left: -870px;
+    .flip{
+        font-size: 25px;
     }
 
-    .balance-actions {
-        gap: 170px;
-    }
-
-    .withdraw-button {
-        width: 100px;
-        height:40px;
-        font-size: 12px;
-        margin-left: -1130px;
-        margin-top: -110px;
-    }
-    .add-balance:hover{
-        background-color: yellow;
-    }
-
-    .add-balance {
-        font-size: 12px;
-        width: 90px;
-        background-color:orangered;
-        margin-top: -110px;
-    }
-    .withdraw-button:hover{
-        background-color: red;
+    .withdraw-button, .add-balance {
+        padding: 12px 20px;
+        font-size: 16px;
     }
 }
+
 /* Container for blocks */
 .blocks-container {
     display: flex;
@@ -326,10 +128,10 @@ body {
     width: 100%;
     max-width: 1000px;
     margin: 220px auto;
-    margin-top:80px;
+    margin-top: 80px;
 }
 
-/* Common block styling */
+/* Common block styling with gradient and shadow */
 .block {
     display: flex;
     flex-direction: column;
@@ -342,8 +144,9 @@ body {
     text-decoration: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    white-space: normal;  /* Default for larger screens */
-    overflow-x: hidden;  /* Prevent horizontal scrolling */
+    white-space: normal;
+    overflow-x: hidden;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* Green and Red Blocks (Larger size) */
@@ -354,14 +157,14 @@ body {
     font-size: 22px;
 }
 
-/* Green Block (Top block) */
+/* Green Block with premium gradient effect */
 .green-block {
     background-color: green;
 }
 
-/* Red Block (Bottom block) */
+/* Red Block with premium gradient effect */
 .red-block {
-    background-color: red;
+    background: red;
 }
 
 /* 8 Smaller Blocks */
@@ -369,24 +172,30 @@ body {
     width: 80px;
     height: 80px;
     font-size: 18px;
+    border-radius: 50%; /* This makes the block circular */
+    display: flex;
+    justify-content: center;
+    align-items: center; /* This ensures text is centered */
 }
 
-/* Green colored blocks for A, B, C, D */
+
+/* Green colored blocks for A, B, C, D with gradient */
 .block.green {
     background-color: green;
 }
 
-/* Red colored blocks for E, F, G, H */
+/* Red colored blocks for E, F, G, H with gradient */
 .block.red {
     background-color: red;
 }
 
-/* Violet Block (I Block) - double the height of smaller blocks */
+/* Violet Block (I Block) - double the height of smaller blocks with glow effect */
 .block.violet {
-    background-color: violet;
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
     width: 80px;
     height: 160px;
     font-size: 18px;
+    box-shadow: 0 0 15px rgba(155, 89, 182, 0.8);
 }
 
 /* Row for small blocks */
@@ -398,16 +207,24 @@ body {
 
 /* Space between the first and second row */
 .row + .row {
-    margin-top: 20px;  /* Adds gap between rows */
+    margin-top: 20px;
+}
+
+/* Hover Effects */
+.block:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .blocks-container {
-        width: 1000px;
+        width: 100%;
         gap: 15px;
-        margin-left: -2000px;
+        margin-left: -50px;
         margin-top: 40px;
+        overflow-x: auto;
+        white-space: nowrap;
     }
 
     .green-block,
@@ -418,14 +235,14 @@ body {
     }
 
     .row .block {
-        width: 40px;
-        height: 40px;
+        width: 60px;
+        height: 60px;
         font-size: 14px;
     }
 
     .block.violet {
-        width: 40px;
-        height: 80px;
+        width: 60px;
+        height: 120px;
         font-size: 14px;
     }
 
@@ -438,7 +255,7 @@ body {
     .blocks-container {
         width: 1000px;
         gap: 5px;
-        margin-left: -300px;
+        margin-left: -310px;
         margin-top: 15px;
         align-items: center;
     }
@@ -456,8 +273,8 @@ body {
         height: 40px;
         font-size: 12px;
     }
-    .row{
-        gap:8px;
+    .row {
+        gap: 8px;
     }
 
     .block.violet {
@@ -470,6 +287,7 @@ body {
         margin-top: 10px;
     }
 }
+
 
 .bet-container {
     display: flex;
