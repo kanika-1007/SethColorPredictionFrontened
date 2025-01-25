@@ -256,15 +256,21 @@ async function fetchTimerState() {
         console.error('Error fetching timer state:', err);
     }
 }
+function updateTimerDisplay(seconds) {
+    // Update the blocks with the individual digits
+    document.getElementById('second1').textContent = Math.floor(seconds / 10); // Tens place of seconds
+    document.getElementById('second2').textContent = seconds % 10; // Ones place of seconds
+}
 
 function startTimer(timeLeft) {
-    const timerElement = document.getElementById('flip'); // Assuming you have an element for the timer
-    timerElement.textContent = timeLeft;
+    let seconds = timeLeft % 60;
 
+    updateTimerDisplay(seconds);
     const interval = setInterval(() => {
         if (timeLeft > 0) {
             timeLeft -= 1;
-            timerElement.textContent = timeLeft;
+            seconds = timeLeft % 60;
+            updateTimerDisplay(seconds);
         } else {
             clearInterval(interval);
             // Handle result generation or bet progression here
@@ -292,8 +298,8 @@ async function startGlobalTimer() {
             // Fetch initial timer state and current bet number from the server
     
             const timer = setInterval(async () => {
-            document.getElementById("flip").textContent = timeLeft;
-    
+               const seconds = timeLeft % 60;
+               updateTimerDisplay(seconds);    
                 if (timeLeft === 5) {
                     isBetAllowed = false;
                 }
