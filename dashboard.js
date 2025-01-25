@@ -163,7 +163,7 @@ async function updateResultHistory(betNo, alphabet, color) {
 
         // Save result to backend
         try {
-            await fetch('${BACKEND_URL}/api/dashboard/result-history', {
+            await fetch(`${BACKEND_URL}/api/dashboard/result-history`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ resultEntry: { betNumber: betNo, alphabet, color } }),
