@@ -30,8 +30,13 @@ body {
     display: flex;
     align-items: center;
     font-size: 22px;
-    color: #333;
+    color:red;
     font-weight: bold;
+    font-family: "Times New Roman";
+}
+.user-info h4{
+    color: black;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .person-icon {
@@ -100,6 +105,7 @@ body {
     }
     .user-info{
         margin-top: -25px;
+        margin-left: -150px;
     }
     .person-icon{
         width: 40px;
@@ -116,6 +122,89 @@ body {
         padding: 12px 20px;
         font-size: 16px;
     }
+    .modalplay{
+        width:max-content;
+        margin-top: 250px;
+    }
+    .modal-contentplay{
+        width: 100px; /* Make the modal content occupy more space on small screens */
+        padding: 50px;
+        word-wrap: break-word; /* Ensures long lines break and wrap */
+        word-break: break-word; 
+    }
+}
+
+/* How to Play Button Styling */
+.how-to-play-button {
+    background: #ff6347; /* Button color */
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 20px;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: -20px;
+}
+
+.how-to-play-button:hover {
+    transform: scale(1.05);
+}
+/* Modal Styling */
+.modalplay {
+    display: none; /* Initially hidden */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Modal Content */
+.modal-contentplay {
+    background-color: white;
+    margin: 15% auto;
+    padding: 40px;
+    border-radius: 10px;
+    width: 100%; /* Adjust width for better responsiveness */
+    max-width: 500px; /* Set max width */
+    text-align: center;
+    box-sizing: border-box;
+    position: relative;
+    word-wrap: break-word; /* Break long words */
+    word-break: break-word; /* Breaks the word if it doesn't fit */
+    white-space: normal; 
+}
+
+.modal-contentplay ul{
+    text-align: left;
+    font-size: 1.1em;
+    list-style-position: inside;
+    padding-left: 20px;
+}
+.modal-contentplay ul li{
+    margin: 10px 0;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+/* Close Button Styling */
+.close-btn {
+    color: #aaa;
+    font-size: 30px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /* Container for blocks */
@@ -389,7 +478,6 @@ body {
     font-size: 16px;
     text-align: center;
     white-space: nowrap;
-    position: sticky;
     top: 0;
     z-index: 2;
 }
@@ -449,10 +537,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
 }
 
 /* Modal Content Styling */
@@ -557,8 +645,9 @@ body {
 @media (max-width: 600px) {
     .modal{
         margin-top:-12px;
-        width:100%;
-        width: 100%;
+        width:90%;
+        width: 90%;
+        margin-left: 20px;
     }
     .modal-content {
         width: 95%;
@@ -652,20 +741,6 @@ body {
         width: 18px;
         height: 18px;
     }
-}
-
-/* Bet History Modal */
-#bet-history-modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
 }
 
 #bet-history-modal .modal-content {
