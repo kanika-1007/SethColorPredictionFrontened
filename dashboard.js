@@ -426,7 +426,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (error) {
             console.error('Error fetching balance during interval:', error);
         }
-    }, 1);
+    }, 1000);
 
     placeBetButton.addEventListener('click', async () => {
         if (!isBetAllowed) {
