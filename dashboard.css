@@ -30,13 +30,11 @@ body {
     display: flex;
     align-items: center;
     font-size: 22px;
-    color:red;
     font-weight: bold;
-    font-family: "Times New Roman";
+    position: relative;
 }
 .user-info h4{
     color: black;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .person-icon {
@@ -45,6 +43,18 @@ body {
     border-radius: 50%;
     margin-right: 15px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+.how-to-play-button {
+    position: absolute;
+    right: 0; /* Position at the right of the container */
+    top: 4; /* Position at the top of the container */
+    font-weight: bold; /* Adjust link styling */
+    font-style:unset;
+    text-decoration:wavy; /* Remove underline from the link */
+}
+
+.how-to-play-button:hover {
+    text-decoration: underline; /* Underline when hovering */
 }
 
 /* Timer styles */
@@ -105,7 +115,10 @@ body {
     }
     .user-info{
         margin-top: -25px;
-        margin-left: -150px;
+        margin-left: -170px;
+    }
+    .how-to-play-button{
+        margin-right: -170px;
     }
     .person-icon{
         width: 40px;
@@ -132,24 +145,9 @@ body {
         word-wrap: break-word; /* Ensures long lines break and wrap */
         word-break: break-word; 
     }
+    
 }
 
-/* How to Play Button Styling */
-.how-to-play-button {
-    background: #ff6347; /* Button color */
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    border-radius: 20px;
-    font-size: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: -20px;
-}
-
-.how-to-play-button:hover {
-    transform: scale(1.05);
-}
 /* Modal Styling */
 .modalplay {
     display: none; /* Initially hidden */
@@ -163,7 +161,7 @@ body {
 
 /* Modal Content */
 .modal-contentplay {
-    background-color: white;
+    background-color:#ddd;
     margin: 15% auto;
     padding: 40px;
     border-radius: 10px;
