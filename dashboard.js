@@ -249,8 +249,7 @@ async function fetchTimerState() {
         currentBetNumber = data.currentBetNumber || 1;
         timeLeft = data.timeLeft || 35;
         betNumberElement.textContent = currentBetNumber;
-        startTimer(); // This will trigger the timer in the backend
-        startTimerDisplay(timeLeft);
+        startTimer(timeLeft);
         if (data.balance) {
             currentBalance = parseFloat(data.balance) || currentBalance;}
     } catch (err) {
@@ -263,7 +262,7 @@ function updateTimerDisplay(seconds) {
     document.getElementById('second2').textContent = seconds % 10; // Ones place of seconds
 }
 
-function startTimerDisplay(timeLeft) {
+function startTimer(timeLeft) {
     let seconds = timeLeft % 60;
 
     updateTimerDisplay(seconds);
@@ -275,25 +274,9 @@ function startTimerDisplay(timeLeft) {
         } else {
             clearInterval(interval);
             // Handle result generation or bet progression here
+            generateResult(); // Call a function to generate result for the new bet number
         }
     }, 1000);
-}
-// Function to start the backend timer (via the new start-timer endpoint)
-async function startTimer() {
-    try {
-        const response = await fetch(`${BACKEND_URL}/api/dashboard/start-timer`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
-        });
-
-        if (response.ok) {
-            console.log("Timer started successfully.");
-        } else {
-            console.error("Failed to start the timer.");
-        }
-    } catch (err) {
-        console.error('Error starting the timer:', err);
-    }
 }
 
 // Helper function to update the timer state on the server
