@@ -136,7 +136,7 @@ async function fetchPlayerHistory() {
     }
 }
 
-/ Function to update result history
+// Function to update result history
 async function updateResultHistory(betNo, alphabet, color) {
     const tableBody = document.querySelector('#result-history-table tbody');
 
