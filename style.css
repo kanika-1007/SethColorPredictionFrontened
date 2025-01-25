@@ -11,7 +11,6 @@ body {
 }
 
 .container {
-    background-color: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
     box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
     width: 100%;
@@ -19,6 +18,91 @@ body {
     padding: 20px;
     text-align: center;
     box-sizing: border-box;
+}
+/* Style for the form container */
+.form {
+    background: #e3f2fd; /* Light background for the form */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 50px auto;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Styling for the logo next to "Seth Color Prediction" */
+h1 {
+    display: flex;
+    align-items: center; /* Align logo and text vertically */
+    font-size: 26px;
+    color: #333;
+}
+
+.logo {
+    width: 40px;  /* Adjust the size of the logo */
+    height: 40px;
+    margin-right: 10px; /* Space between the logo and the text */
+}
+
+/* Styling for the "Login" heading */
+h2 {
+    font-size: 22px;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Styling for input fields */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* Styling for the "Log In" button */
+#loginButton {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #42a5f5;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#loginButton:hover {
+    background-color: #1e88e5; /* Darker blue on hover */
+}
+
+/* Links styling */
+a {
+    color: #42a5f5;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .form {
+        padding: 15px;
+        width: 90%;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    .logo {
+        width: 35px;
+        height: 35px;
+    }
 }
 
 label {
