@@ -246,9 +246,7 @@ async function fetchTimerState() {
     try {
         const response = await fetch(`${BACKEND_URL}/api/dashboard/timer-state`);
         const data = await response.json();
-        currentBetNumber = data.currentBetNumber || 1;
         timeLeft = data.timeLeft || 35;
-        betNumberElement.textContent = currentBetNumber;
         startTimer(timeLeft);
         if (data.balance) {
             currentBalance = parseFloat(data.balance) || currentBalance;}
