@@ -26,6 +26,9 @@ const betHistoryModal = document.getElementById('bet-history-modal');
 const closeHistoryButton = document.getElementById('close-history-button');
 const BACKEND_URL = "https://seth-color-prediction.onrender.com";
 const scrollContainer = document.querySelector('.scroll-container');
+const modal = document.getElementById("howToPlayModal");
+const btn = document.querySelector(".how-to-play-button");
+const closeBtn = document.getElementById("closeModal");
 scrollContainer.addEventListener('scroll', () => {
     if (scrollContainer.scrollLeft > 70) { // Limit scrolling to 300px
         scrollContainer.scrollLeft = 70;
@@ -133,24 +136,41 @@ async function fetchPlayerHistory() {
     }
 }
 
+/ Function to update result history
 async function updateResultHistory(betNo, alphabet, color) {
     const tableBody = document.querySelector('#result-history-table tbody');
-    const newRow = document.createElement('tr');
-    newRow.innerHTML = `
-        <td>${betNo}</td>
-        <td>${alphabet}</td>
-        <td style="color: ${color.toLowerCase()}; font-weight: bold;">${color}</td>
-    `;
-    tableBody.prepend(newRow);
 
-    try {
-        await fetch(`${BACKEND_URL}/api/dashboard/result-history`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ resultEntry: { betNumber: betNo, alphabet, color } }),
-        });
-    } catch (err) {
-        console.error('Error saving result history:', err);
+    // Check if this bet number already exists in the history table
+    const existingRows = tableBody.querySelectorAll('tr');
+    let isDuplicate = false;
+    
+    existingRows.forEach(row => {
+        const betNoCell = row.querySelector('td');
+        if (betNoCell && betNoCell.textContent === betNo.toString()) {
+            isDuplicate = true; // Mark as duplicate if found
+        }
+    });
+
+    // Only add to table if it's not a duplicate
+    if (!isDuplicate) {
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td>${betNo}</td>
+            <td>${alphabet}</td>
+            <td style="color: ${color.toLowerCase()}; font-weight: bold;">${color}</td>
+        `;
+        tableBody.prepend(newRow);
+
+        // Save result to backend
+        try {
+            await fetch('${BACKEND_URL}/api/dashboard/result-history', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ resultEntry: { betNumber: betNo, alphabet, color } }),
+            });
+        } catch (err) {
+            console.error('Error saving result history:', err);
+        }
     }
 }
 
@@ -450,5 +470,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     closeHistoryButton.addEventListener('click', () => {
         betHistoryModal.style.display = 'none';
     });
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+    // When the close button (×) is clicked, hide the modal
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 });
 
