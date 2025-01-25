@@ -248,6 +248,7 @@ async function fetchTimerState() {
         const data = await response.json();
         timeLeft = data.timeLeft;
         currentBetNumber = data.currentBetNumber;
+        betNumberElement.textContent = currentBetNumber;
         if (data.balance) {
             currentBalance = parseFloat(data.balance) || currentBalance;}
     } catch (err) {
@@ -363,9 +364,9 @@ async function startGlobalTimer() {
                 timeLeft--;
     
                 // Update timer state on the server periodically
-                if (timeLeft % 1 === 0) {
+                
                     await updateTimerState(timeLeft, currentBetNumber);
-                }
+                
             }, 1000);
         } catch (err) {
             console.error("Error initializing global timer:", err);
@@ -399,7 +400,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await fetchCurrentBetNumber();
     await fetchPlayerHistory();
 
-    startGlobalTimer();
+    await startGlobalTimer();
 
     blocks.forEach((block) => {
         block.addEventListener('click', (e) => {
@@ -425,7 +426,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (error) {
             console.error('Error fetching balance during interval:', error);
         }
-    }, 1000);
+    }, 1);
 
     placeBetButton.addEventListener('click', async () => {
         if (!isBetAllowed) {
