@@ -24,16 +24,15 @@ const betNumberElement = document.getElementById('bet-number');
 const viewHistoryButton = document.getElementById('view-history-button');
 const betHistoryModal = document.getElementById('bet-history-modal');
 const closeHistoryButton = document.getElementById('close-history-button');
-const BACKEND_URL = "https://seth-color-prediction.onrender.com";
 const scrollContainer = document.querySelector('.scroll-container');
+scrollContainer.addEventListener('scroll', () => {
+    if (scrollContainer.scrollLeft > 80 ) { // Limit scrolling to 300px
+        scrollContainer.scrollLeft = 80;
+    }
+});
 const modal = document.getElementById("howToPlayModal");
 const btn = document.querySelector(".how-to-play-button");
 const closeBtn = document.getElementById("closeModal");
-scrollContainer.addEventListener('scroll', () => {
-    if (scrollContainer.scrollLeft > 70) { // Limit scrolling to 300px
-        scrollContainer.scrollLeft = 70;
-    }
-});
 
 // Utility Functions
 function generateUserId() {
@@ -73,7 +72,7 @@ function getRandomResult() {
 // Backend Fetch Functions
 async function fetchCurrentBetNumber() {
     try {
-        const response = await fetch(`${BACKEND_URL}/api/dashboard/current-bet-number`);
+        const response = await fetch('${BACKEND_URL}/api/dashboard/current-bet-number');
         const data = await response.json();
         currentBetNumber = data.currentBetNumber || 1;
         betNumberElement.textContent = currentBetNumber;
@@ -84,7 +83,7 @@ async function fetchCurrentBetNumber() {
 
 async function updateCurrentBetNumber() {
     try {
-        await fetch(`${BACKEND_URL}/api/dashboard/update-bet-number`, {
+        await fetch('${BACKEND_URL}/api/dashboard/update-bet-number', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ currentBetNumber }),
@@ -100,7 +99,7 @@ async function savePlayerHistory(betNo, played, betAmount, status, amountWon, ba
             username,
             historyEntry: { betNo, played, betAmount, status, amountWon, balanceAfterBet },
         };
-        await fetch(`${BACKEND_URL}/api/dashboard/player-history`, {
+        await fetch('${BACKEND_URL}/api/dashboard/player-history', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
@@ -163,7 +162,7 @@ async function updateResultHistory(betNo, alphabet, color) {
 
         // Save result to backend
         try {
-            await fetch(`${BACKEND_URL}/api/dashboard/result-history`, {
+            await fetch('${BACKEND_URL}/api/dashboard/result-history', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ resultEntry: { betNumber: betNo, alphabet, color } }),
@@ -174,10 +173,11 @@ async function updateResultHistory(betNo, alphabet, color) {
     }
 }
 
+
 // Ensure result history persists across page refreshes
 async function fetchResultHistory() {
     try {
-        const response = await fetch(`${BACKEND_URL}/api/dashboard/result-history`);
+        const response = await fetch('${BACKEND_URL}/api/dashboard/result-history');
         const history = await response.json();
 
         // Sort the results in descending order by betNumber
@@ -219,7 +219,7 @@ async function fetchUserBalance() {
 
 async function updateUserBalance(newBalance) {
     try {
-        await fetch(`${BACKEND_URL}/api/dashboard/balance`, {
+        await fetch('${BACKEND_URL}/api/dashboard/balance', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, balance: newBalance }),
@@ -231,7 +231,7 @@ async function updateUserBalance(newBalance) {
 
 async function saveBetForAdmin(betData) {
     try {
-        await fetch(`${BACKEND_URL}/api/dashboard/active-bets`, {
+        await fetch('${BACKEND_URL}/api/dashboard/active-bets', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(betData),
@@ -244,22 +244,38 @@ async function saveBetForAdmin(betData) {
 // Fetch the timer state from the server
 async function fetchTimerState() {
     try {
-        const response = await fetch(`${BACKEND_URL}/api/dashboard/timer-state`);
+        const response = await fetch('${BACKEND_URL}/api/dashboard/timer-state');
         const data = await response.json();
-        timeLeft = data.timeLeft;
-        currentBetNumber = data.currentBetNumber;
+        currentBetNumber = data.currentBetNumber || 1;
+        timeLeft = data.timeLeft || 35;
         betNumberElement.textContent = currentBetNumber;
+        startTimer(timeLeft);
         if (data.balance) {
             currentBalance = parseFloat(data.balance) || currentBalance;}
     } catch (err) {
         console.error('Error fetching timer state:', err);
     }
 }
+function startTimer(timeLeft) {
+    const timerElement = document.getElementById('flip'); // Assuming you have an element for the timer
+    timerElement.textContent = timeLeft;
+
+    const interval = setInterval(() => {
+        if (timeLeft > 0) {
+            timeLeft -= 1;
+            timerElement.textContent = timeLeft;
+        } else {
+            clearInterval(interval);
+            // Handle result generation or bet progression here
+            generateResult(); // Call a function to generate result for the new bet number
+        }
+    }, 1000);
+}
 
 // Helper function to update the timer state on the server
 async function updateTimerState(timeLeft, currentBetNumber) {
         try {
-            await fetch(`${BACKEND_URL}/api/dashboard/update-timer-state`, {
+            await fetch("${BACKEND_URL}/api/dashboard/update-timer-state", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ timeLeft, currentBetNumber }),
@@ -376,7 +392,7 @@ async function startGlobalTimer() {
     // Fetch Manual Result State
 async function fetchManualResultState() {
     try {
-        const response = await fetch(`${BACKEND_URL}/api/dashboard/manual-result-state`);
+        const response = await fetch("${BACKEND_URL}/api/dashboard/manual-result-state");
         return await response.json();
     } catch (err) {
         console.error("Error fetching manual result state:", err);
@@ -426,7 +442,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         } catch (error) {
             console.error('Error fetching balance during interval:', error);
         }
-    }, 1000);
+    }, 1);
 
     placeBetButton.addEventListener('click', async () => {
         if (!isBetAllowed) {
@@ -458,7 +474,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         isBetPlaced = true;
         betModal.style.display = 'none';
     });
-
+    
+     // When the "How to Play" button is clicked, show the modal
     closeModalButton.addEventListener('click', () => {
         betModal.style.display = 'none';
     });
@@ -471,6 +488,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     closeHistoryButton.addEventListener('click', () => {
         betHistoryModal.style.display = 'none';
     });
+
     btn.onclick = function() {
         modal.style.display = "block";
     }
