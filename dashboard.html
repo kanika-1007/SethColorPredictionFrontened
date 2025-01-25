@@ -17,19 +17,25 @@
         <!-- User Info -->
         <div class="user-info">
             <img src="images/amonus.jpg" alt="Person Icon" class="person-icon">
-            <h4>Name:</h4> <span id="user-id"></span>
+            <h4>Name: </h4><span id="user-id"></span>
             <a href="#" class="how-to-play-button">How to Play</a> 
          </div>
 
         <!--Timer details-->
         <div class="timer-container">
-            <div class="timer-label">Time left :</div>
-            <div class="flip" id="flip"><span>00:</span>35</div>
+            <div class="timer-label">Timer : </div>
+            <div class="timer" id="flip">
+                <div class="timer-block">0</div>
+                <div class="timer-block">0</div>
+                <div class="timer-separator">:</div>
+                <div class="timer-block">3</div>
+                <div class="timer-block">5</div>
+            </div>        
         </div>                              
 
         <div class="balance-info">
             <div class="balance-details">
-                <h4>Amount: 
+                <h4>Amount : 
                      <span class="rupee-icon">(₹)</span><span id="balance">0</span>
                 </h4>
             </div>
@@ -37,7 +43,13 @@
             <div class="balance-actions">
                 <button class="withdraw-button" onclick="window.location.href='withdrawal.html'">Withdrawal</button>
                 <button class="add-balance" onclick="window.location.href='add-money.html'">Add Money</button>
-            </div>       
+            </div>  
+            <!-- Blinking and Moving Text -->
+<div class="blinking-text-wrapper">
+    <div class="blinking-text">
+        Welcome to Seth Color Prediction. Since 2007. "Predict. Bet. Win. It’s that simple."
+    </div>
+</div>              
     </div>
 
     <div class="blocks-container">
@@ -67,7 +79,7 @@
         </div>
     
         <!-- I Block -->
-        <a class="block violet">I <span class="multiplier">4.5x</span></a>
+        <a class="block violet">Violet { I } <span class="multiplier">4.5x</span></a>
     
         <div class = "red-block block" id="red-block">
             <a href="#" class="block red">Red
