@@ -218,7 +218,7 @@ async function fetchUserBalance() {
 }
 
 async function updateUserBalance(newBalance) {
-    console.log("new balance is"newbalance);
+    console.log("new balance is", newbalance);
     try {
         await fetch(`${BACKEND_URL}/api/dashboard/balance`, {
             method: 'POST',
