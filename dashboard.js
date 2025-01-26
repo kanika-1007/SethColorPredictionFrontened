@@ -272,7 +272,6 @@ function startTimer(timeLeft) {
         } else {
             clearInterval(interval);
             // Handle result generation or bet progression here
-            generateResult(); // Call a function to generate result for the new bet number
         }
     }, 1000);
 }
