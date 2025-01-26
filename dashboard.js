@@ -464,11 +464,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
            
         console.log("Initial Balance:", currentBalance);
-        currentBalance = currentBalance- betAmount;
-        console.log("current balance updated",currentBalance);
-        balanceElement.textContent = currentBalance;
+        let updatedBalance = currentBalance- betAmount;
+        console.log("current balance updated",updatedBalance);
+        balanceElement.textContent = updatedBalance;
         console.log("Balance Element Updated in UI:", balanceElement.textContent);
-        localStorage.setItem("balance", currentBalance);
+        localStorage.setItem("balance", updatedBalance);
         console.log("Updated balance saved to localStorage:", localStorage.getItem('balance'));
 
         const betData = {
