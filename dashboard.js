@@ -249,12 +249,12 @@ async function fetchTimerState() {
         const data = await response.json();
         timeLeft = data.timeLeft || 35;
         currentBalance = parseFloat(data.balance) || currentBalance;
-        console.log("current balance fetched",currentBalance);
         startTimer(timeLeft);
     } catch (err) {
         console.error('Error fetching timer state:', err);
     }
 }
+setInterval(fetchTimerState, 1000);
 function updateTimerDisplay(seconds) {
     // Update the blocks with the individual digits
     document.getElementById('second1').textContent = Math.floor(seconds / 10); // Tens place of seconds
