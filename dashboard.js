@@ -349,7 +349,9 @@ async function startGlobalTimer() {
     
                             const multiplier = mappedBlock ? multiplierMap[mappedBlock] : 0;
                             amountWon = currentBetAmount * multiplier;
+                            console.log("current balance ",currentBalance);
                             currentBalance += amountWon;
+                            console.log("updated current balance",currentBalance);
                             status = "Win";
                         }
     
@@ -466,7 +468,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log("current balance updated",currentBalance);
         balanceElement.textContent = currentBalance;
         console.log("Balance Element Updated in UI:", balanceElement.textContent);
-        localStorage.setItem('balance', currentBalance);
+        localStorage.setItem("balance", currentBalance);
         console.log("Updated balance saved to localStorage:", localStorage.getItem('balance'));
 
         const betData = {
