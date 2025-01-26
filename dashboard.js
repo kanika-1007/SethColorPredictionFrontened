@@ -218,6 +218,7 @@ async function fetchUserBalance() {
 }
 
 async function updateUserBalance(newBalance) {
+    console.log("new balance is"newbalance);
     try {
         await fetch(`${BACKEND_URL}/api/dashboard/balance`, {
             method: 'POST',
@@ -475,16 +476,29 @@ document.addEventListener('DOMContentLoaded', async () => {
             betBlock: currentBetBlock,
             betAmount,
         };
-    try{
+   try {
+        // Save bet data for admin
         await saveBetForAdmin(betData);
-        await updateUserBalance(currentBalance);  // Save the updated balance to the backend
 
+        // Save the updated balance to backend after bet placement
+        const response = await updateUserBalance(updatedBalance);
+
+        // Now proceed with placing the bet, update local state
         currentBetAmount = betAmount;
-           console.log("current bet amount is ",currentBetAmount);
+        console.log("current bet amount is ", currentBetAmount);
+
         isBetPlaced = true;
-        betModal.style.display = 'none';
-    }catch(err){
-        console.error('Error during bet placement',err);
+        betModal.style.display = 'none';  // Close the modal
+
+        // After the bet, the backend update is complete, and now you can fetch the updated balance
+        const { balance } = response; // Assuming backend sends the updated balance
+        balanceElement.textContent = balance; // Update balance in UI based on server response
+        localStorage.setItem("balance", balance); // Sync with localStorage
+    } catch (err) {
+        console.error('Error during bet placement', err);
+        // Optionally revert balance to the previous value in case of failure
+        balanceElement.textContent = currentBalance;
+        localStorage.setItem("balance", currentBalance);
     }
        });
 
