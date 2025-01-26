@@ -244,7 +244,6 @@ async function saveBetForAdmin(betData) {
 
 // Fetch the timer state from the server
 async function fetchTimerState() {
-    setInterval(async () => {
     try {
         const response = await fetch(`${BACKEND_URL}/api/dashboard/timer-state`);
         const data = await response.json();
@@ -254,7 +253,6 @@ async function fetchTimerState() {
     } catch (err) {
         console.error('Error fetching timer state:', err);
     }
-    },1000);
 }
 function updateTimerDisplay(seconds) {
     // Update the blocks with the individual digits
