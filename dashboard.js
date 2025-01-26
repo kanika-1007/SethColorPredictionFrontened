@@ -426,6 +426,7 @@ async function placeBet() {
         betNo: currentBetNumber,
         betBlock: currentBetBlock,
         betAmount,
+        username,
     };
         await saveBetForAdmin(betData);
         await updateUserBalance(currentBalance);  // Save the updated balance to the backend
