@@ -460,8 +460,10 @@ document.addEventListener('DOMContentLoaded', async () => {
             alert('Insufficient balance!');
             return;
         }
-
-        currentBalance -= betAmount;
+           
+        console.log("Initial Balance:", currentBalance);
+        currentBalance = currentBalance- betAmount;
+        console.log("current balance updated",currentBalance);
         balanceElement.textContent = currentBalance;
         localStorage.setItem('balance', currentBalance);
 
@@ -475,6 +477,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await updateUserBalance(currentBalance);  // Save the updated balance to the backend
 
         currentBetAmount = betAmount;
+           console.log("current bet amount is ",currentBetAmount);
         isBetPlaced = true;
         betModal.style.display = 'none';
     });
