@@ -116,9 +116,9 @@ async function fetchPlayerHistory() {
         const data = await response.json();
         const tableBody = document.querySelector('#player-history-table tbody');
         tableBody.innerHTML = '';
-
-        if (data.playerHistory && data.playerHistory.length > 0) {
-            data.playerHistory.forEach((entry) => {
+        const playerHistory = data.playerHistory.slice(-50).reverse(); // Get last 50 and reverse the order
+        if (playerHistory && playerHistory.length > 0) {
+            playerHistory.forEach((entry) => {
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
                     <td>${entry.betNo}</td>
