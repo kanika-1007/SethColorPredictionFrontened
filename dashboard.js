@@ -247,9 +247,9 @@ async function fetchTimerState() {
         const response = await fetch(`${BACKEND_URL}/api/dashboard/timer-state`);
         const data = await response.json();
         timeLeft = data.timeLeft || 35;
+        currentBalance = parseFloat(data.balance) || currentBalance;
+        console.log("current balance fetched",currentBalance);
         startTimer(timeLeft);
-        if (data.balance) {
-            currentBalance = parseFloat(data.balance) || currentBalance;}
     } catch (err) {
         console.error('Error fetching timer state:', err);
     }
