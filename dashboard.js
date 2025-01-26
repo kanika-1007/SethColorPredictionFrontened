@@ -427,6 +427,12 @@ async function placeBet() {
         betBlock: currentBetBlock,
         betAmount,
     };
+        await saveBetForAdmin(betData);
+        await updateUserBalance(currentBalance);  // Save the updated balance to the backend
+
+        currentBetAmount = betAmount;
+        isBetPlaced = true;
+        betModal.style.display = 'none';
 
     try {
         // Send bet data to backend for processing
@@ -480,13 +486,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Bind the `placeBet` function to the "Place Bet" button
     placeBetButton.addEventListener('click', async () => {
-        await placeBet();  // Trigger the placeBet function when the button is clicked
-        await saveBetForAdmin(betData);
-        await updateUserBalance(currentBalance);  // Save the updated balance to the backend
-
-        currentBetAmount = betAmount;
-        isBetPlaced = true;
-        betModal.style.display = 'none';
+        await placeBet();  // Trigger the placeBet function when the button is clicke
     });
 
     // Periodically fetch balance every 10 seconds with error handling
