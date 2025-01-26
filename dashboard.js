@@ -465,6 +465,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         currentBalance = currentBalance- betAmount;
         console.log("current balance updated",currentBalance);
         balanceElement.textContent = currentBalance;
+        console.log("Balance Element Updated in UI:", balanceElement.textContent);
         localStorage.setItem('balance', currentBalance);
         console.log("Updated balance saved to localStorage:", localStorage.getItem('balance'));
 
