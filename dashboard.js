@@ -405,58 +405,6 @@ async function fetchManualResultState() {
     }
 }
 
-async function placeBet() {
-     if (!isBetAllowed) {
-            alert('Betting is disabled for the last 5 seconds.');
-            return;
-        }
-    const betAmount = parseInt(betAmountInput.value);
-
-    if (betAmount > currentBalance) {
-        alert('Insufficient balance!');
-        return;
-    }
-
-    // Deduct bet amount from balance immediately in the frontend
-    currentBalance -= betAmount;
-    balanceElement.textContent = currentBalance;
-    localStorage.setItem('balance', currentBalance);  // Store updated balance in localStorage
-
-    const betData = {
-        betNo: currentBetNumber,
-        betBlock: currentBetBlock,
-        betAmount,
-        username,
-    };
-        await saveBetForAdmin(betData);
-        await updateUserBalance(currentBalance);  // Save the updated balance to the backend
-
-        currentBetAmount = betAmount;
-        isBetPlaced = true;
-        betModal.style.display = 'none';
-
-    try {
-        // Send bet data to backend for processing
-        const response = await fetch(`${BACKEND_URL}/api/dashboard/place-bet`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(betData),
-        });
-
-        const data = await response.json();
-        if (data.balance !== undefined) {
-            // Update the balance after bet placement
-            currentBalance = data.balance;
-            balanceElement.textContent = currentBalance;
-            localStorage.setItem('balance', currentBalance); // Save to localStorage
-        }
-
-        alert(data.message); // Show message (win/lose)
-    } catch (err) {
-        console.error('Error placing bet:', err);
-    }
-}
-
 // Event Listeners and Main Logic
 document.addEventListener('DOMContentLoaded', async () => {
     userIdElement.textContent = username || 'Guest';
@@ -484,13 +432,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             betAmountInput.value = '';
         });
     });
-    
-    // Bind the `placeBet` function to the "Place Bet" button
-    placeBetButton.addEventListener('click', async () => {
-        await placeBet();  // Trigger the placeBet function when the button is clicke
-    });
-
-    // Periodically fetch balance every 10 seconds with error handling
+        // Periodically fetch balance every 10 seconds with error handling
     setInterval(async () => {
         try {
             const updatedBalance = await fetchUserBalance();
@@ -505,6 +447,37 @@ document.addEventListener('DOMContentLoaded', async () => {
             console.error('Error fetching balance during interval:', error);
         }
     }, 1000);
+    
+       placeBetButton.addEventListener('click', async () => {
+        if (!isBetAllowed) {
+            alert('Betting is disabled for the last 5 seconds.');
+            return;
+        }
+
+        const betAmount = parseInt(betAmountInput.value);
+
+        if (betAmount > currentBalance) {
+            alert('Insufficient balance!');
+            return;
+        }
+
+        currentBalance -= betAmount;
+        balanceElement.textContent = currentBalance;
+        localStorage.setItem('balance', currentBalance);
+
+        const betData = {
+            betNo: currentBetNumber,
+            betBlock: currentBetBlock,
+            betAmount,
+        };
+
+        await saveBetForAdmin(betData);
+        await updateUserBalance(currentBalance);  // Save the updated balance to the backend
+
+        currentBetAmount = betAmount;
+        isBetPlaced = true;
+        betModal.style.display = 'none';
+    });
 
     closeModalButton.addEventListener('click', () => {
         betModal.style.display = 'none';
