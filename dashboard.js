@@ -466,13 +466,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.log("current balance updated",currentBalance);
         balanceElement.textContent = currentBalance;
         localStorage.setItem('balance', currentBalance);
+        console.log("Updated balance saved to localStorage:", localStorage.getItem('balance'));
 
         const betData = {
             betNo: currentBetNumber,
             betBlock: currentBetBlock,
             betAmount,
         };
-
+    try{
         await saveBetForAdmin(betData);
         await updateUserBalance(currentBalance);  // Save the updated balance to the backend
 
@@ -480,7 +481,10 @@ document.addEventListener('DOMContentLoaded', async () => {
            console.log("current bet amount is ",currentBetAmount);
         isBetPlaced = true;
         betModal.style.display = 'none';
-    });
+    }catch(err){
+        console.error('Error during bet placement',err);
+    }
+       });
 
     closeModalButton.addEventListener('click', () => {
         betModal.style.display = 'none';
