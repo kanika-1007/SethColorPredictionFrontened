@@ -42,33 +42,34 @@ function generateUserId() {
 
 // Alphabet-to-Color Mapping and Multiplier
 const alphabetColorMap = {
-    A: 'Green',
-    B: 'Green',
-    C: 'Green',
-    D: 'Green',
-    E: 'Red',
-    F: 'Red',
-    G: 'Red',
-    H: 'Red',
-    I: 'Violet',
+    1: 'Green',
+    2: 'Red',
+    3: 'Green',
+    4: 'Red',
+    6: 'Green',
+    7: 'Red',
+    8: 'Green',
+    9: 'Red',
+    5: 'Violet',
     Green: 'Green',
     Red: 'Red',
 };
 
 const multiplierMap = {
-    A: 9, B: 9, C: 9, D: 9, // Green blocks
-    E: 9, F: 9, G: 9, H: 9, // Red blocks
-    I: 4.5,                  // Violet block
+    1: 9, 2: 9, 3: 9, 4: 9, // Green blocks
+    6: 9, 7: 9, 8: 9, 9: 9, // Red blocks
+    5: 4.5,                  // Violet block
     Green: 2,                // Green side block
     Red: 2,                  // Red side block
 };
 
 function getRandomResult() {
-    const alphabets = Object.keys(alphabetColorMap).filter((key) => key.length === 1);
-    const randomAlphabet = alphabets[Math.floor(Math.random() * alphabets.length)];
-    const color = alphabetColorMap[randomAlphabet];
-    return { alphabet: randomAlphabet, color };
+    const numbers = Array.from({ length: 10 }, (_, i) => i.toString()); // Generate numbers from 0 to 9
+    const randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
+    const color = alphabetColorMap[randomNumber] || 'DefaultColor'; // Map number to color (ensure a default fallback)    
+    return { number: randomNumber, color };
 }
+
 
 // Backend Fetch Functions
 async function fetchCurrentBetNumber() {
@@ -137,7 +138,7 @@ async function fetchPlayerHistory() {
 }
 
 // Function to update result history
-async function updateResultHistory(betNo, alphabet, color) {
+async function updateResultHistory(betNo, number, color) {
     const tableBody = document.querySelector('#result-history-table tbody');
 
     // Check if this bet number already exists in the history table
@@ -156,7 +157,7 @@ async function updateResultHistory(betNo, alphabet, color) {
         const newRow = document.createElement('tr');
         newRow.innerHTML = `
             <td>${betNo}</td>
-            <td>${alphabet}</td>
+            <td>${number}</td>
             <td style="color: ${color.toLowerCase()}; font-weight: bold;">${color}</td>
         `;
         tableBody.prepend(newRow);
@@ -166,7 +167,7 @@ async function updateResultHistory(betNo, alphabet, color) {
             await fetch(`${BACKEND_URL}/api/dashboard/result-history`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ resultEntry: { betNumber: betNo, alphabet, color } }),
+                body: JSON.stringify({ resultEntry: { betNumber: betNo, number, color } }),
             });
         } catch (err) {
             console.error('Error saving result history:', err);
@@ -191,7 +192,7 @@ async function fetchResultHistory() {
             const newRow = document.createElement('tr');
             newRow.innerHTML = `
                 <td>${result.betNumber}</td>
-                <td>${result.alphabet}</td>
+                <td>${result.number}</td>
                 <td style="color: ${result.color.toLowerCase()}; font-weight: bold;">${result.color}</td>
             `;
             tableBody.appendChild(newRow);
@@ -313,28 +314,28 @@ async function startGlobalTimer() {
                 if (isManualResultEnabled && selectedColor) {
                     // Get a random alphabet corresponding to the selected color
                     const alphabetsForColor = Object.entries(alphabetColorMap)
-                        .filter(([alphabet, color]) => color === selectedColor && alphabet.length === 1)
-                        .map(([alphabet]) => alphabet);
+                        .filter(([number, color]) => color === selectedColor && number.length === 1)
+                        .map(([number]) => number);
 
-                    const randomAlphabet =
+                    const randomNumber =
                         alphabetsForColor[Math.floor(Math.random() * alphabetsForColor.length)];
 
-                    result = { alphabet: randomAlphabet, color: selectedColor };
+                    result = { number: randomNumber, color: selectedColor };
                 } else {
                     // Default random result
                     result = getRandomResult();
                 }             
                     // Generate the result for the current bet
-                    const { alphabet, color } = result;
+                    const { number, color } = result;
                     
-                    await updateResultHistory(currentBetNumber, alphabet, color);
+                    await updateResultHistory(currentBetNumber, number, color);
     
                     if (isBetPlaced) {
                         let status = "Lose";
                         let amountWon = 0;
     
                         const normalizedBetBlock = currentBetBlock.trim().toLowerCase();
-                        const normalizedAlphabet = alphabet.trim().toLowerCase();
+                        const normalizedAlphabet = number.trim().toLowerCase();
                         const normalizedColor = color.trim().toLowerCase();
     
                         // Check if bet matches the result (alphabet or color)
