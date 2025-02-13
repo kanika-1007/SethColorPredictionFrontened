@@ -525,4 +525,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             modal.style.display = "none";
         }
     }
+    setTimeout(() => {
+        location.reload();
+    }, 35000); // 35 seconds
 });
