@@ -64,7 +64,7 @@ const multiplierMap = {
 };
 
 function getRandomResult() {
-    const numbers = Array.from({ length: 10 }, (_, i) => i.toString()); // Generate numbers from 0 to 9
+    const numbers = Array.from({ length: 9 }, (_, i) => (i + 1).toString()); // Generate numbers from 1 to 9
     const randomNumber = numbers[Math.floor(Math.random() * numbers.length)];
     const color = alphabetColorMap[randomNumber] || 'DefaultColor'; // Map number to color (ensure a default fallback)    
     return { number: randomNumber, color };
