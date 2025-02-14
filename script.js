@@ -71,7 +71,24 @@ document.getElementById('signupButton').addEventListener('click', async () => {
     const favFood = document.getElementById('favFood').value;
     const bestFriend = document.getElementById('bestFriend').value;
 
+    if (!phone || !username || !password || !favCar || !favFood || !bestFriend) {
+        alert("Please fill in all fields.");
+        return;
+    }
+
     try {
+        const checkResponse = await fetch(`${BACKEND_URL}/check-phone`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ phone }),
+        });
+
+        const checkData = await checkResponse.json();
+        if (checkResponse.ok && checkData.exists) {
+            alert("This phone number is already registered. Please log in.");
+            return;
+        }
+        
         const response = await fetch(`${BACKEND_URL}/signup`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
