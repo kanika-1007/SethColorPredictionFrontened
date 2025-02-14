@@ -499,7 +499,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         balanceElement.textContent = balance; // Update balance in UI based on server response
         localStorage.setItem("balance", balance); // Sync with localStorage
     } catch (err) {
-        console.error('Error during bet placement', err);
         // Optionally revert balance to the previous value in case of failure
         balanceElement.textContent = currentBalance;
         localStorage.setItem("balance", currentBalance);
