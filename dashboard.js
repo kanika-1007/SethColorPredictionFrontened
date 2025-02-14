@@ -341,13 +341,17 @@ async function startGlobalTimer() {
                         // Check if bet matches the result (alphabet or color)
                         if (
                             normalizedBetBlock === normalizedAlphabet ||
-                            normalizedBetBlock === normalizedColor
+                            normalizedBetBlock === normalizedColor ||
+                            (normalizedBetBlock === "Violet" && number === "5")
                         ) {
-                            const mappedBlock = Object.keys(multiplierMap).find(
+                            if (normalizedBetBlock === "Violet" || number === "5") {
+                                 multiplier = multiplierMap[5];  // 4.5x multiplier for Violet (5)
+                               } else {
+                             const mappedBlock = Object.keys(multiplierMap).find(
                                 (key) => key.toLowerCase() === currentBetBlock.trim().toLowerCase()
                             );
-    
                             const multiplier = mappedBlock ? multiplierMap[mappedBlock] : 0;
+                            }
                             amountWon = currentBetAmount * multiplier;
                             console.log("current balance is ",currentBalance);
                             currentBalance += amountWon;
