@@ -248,9 +248,11 @@ async function fetchTimerState() {
     try {
         const response = await fetch(`${BACKEND_URL}/api/dashboard/timer-state`);
         const data = await response.json();
+        console.log(`Global Time Left: ${data.timeLeft}s | Bet Number: ${data.currentBetNumber}`);
         updateTimerDisplay(data.timeLeft);
         currentBalance = parseFloat(data.balance) || currentBalance;
-        startTimer(timeLeft);
+         currentBetNumber = data.currentBetNumber; // Sync the bet number
+        betNumberElement.textContent = currentBetNumber;
     } catch (err) {
         console.error('Error fetching timer state:', err);
     }
