@@ -530,4 +530,5 @@ document.addEventListener('DOMContentLoaded', async () => {
             modal.style.display = "none";
         }
     }
+    setInterval(fetchResultHistory, 1000);
 });
