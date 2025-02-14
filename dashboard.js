@@ -248,13 +248,14 @@ async function fetchTimerState() {
     try {
         const response = await fetch(`${BACKEND_URL}/api/dashboard/timer-state`);
         const data = await response.json();
-        timeLeft = data.timeLeft || 35;
+        updateTimerDisplay(data.timeLeft);
         currentBalance = parseFloat(data.balance) || currentBalance;
         startTimer(timeLeft);
     } catch (err) {
         console.error('Error fetching timer state:', err);
     }
 }
+setInterval(fetchTimerState, 1000);
 function updateTimerDisplay(seconds) {
     // Update the blocks with the individual digits
     document.getElementById('second1').textContent = Math.floor(seconds / 10); // Tens place of seconds
@@ -530,7 +531,4 @@ document.addEventListener('DOMContentLoaded', async () => {
             modal.style.display = "none";
         }
     }
-    setTimeout(() => {
-        location.reload();
-    }, 35000); // 35 seconds
 });
