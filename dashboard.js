@@ -248,16 +248,13 @@ async function fetchTimerState() {
     try {
         const response = await fetch(`${BACKEND_URL}/api/dashboard/timer-state`);
         const data = await response.json();
-        console.log(`Global Time Left: ${data.timeLeft}s | Bet Number: ${data.currentBetNumber}`);
-        updateTimerDisplay(data.timeLeft);
+        timeLeft = data.timeLeft || 35;
         currentBalance = parseFloat(data.balance) || currentBalance;
-         currentBetNumber = data.currentBetNumber; // Sync the bet number
-        betNumberElement.textContent = currentBetNumber;
+        startTimer(timeLeft);
     } catch (err) {
         console.error('Error fetching timer state:', err);
     }
 }
-setInterval(fetchTimerState, 1000);
 function updateTimerDisplay(seconds) {
     // Update the blocks with the individual digits
     document.getElementById('second1').textContent = Math.floor(seconds / 10); // Tens place of seconds
